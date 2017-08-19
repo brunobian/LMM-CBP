@@ -18,7 +18,7 @@ for i,l in enumerate(labos):
 		inPath	= '"~/Bruno_R/csv_103/"'
 		outPath	= '"~/lmm_results_500/across2/"'
 		modType	= '"lmm"'
-		rPath	= '"~/CuBaPeTo/R_functions/"'
+		rPath	= '"~/CuBaPeTo2/R_functions/"'
 		fixEf	= '"\\"freq + palnum:tipo + pred:tipo\\""'
 		ranEf	= '"\\"(1|suj_id) + (1|pal)\\""'
 		perPath	= '"~/Bruno_R/permutations/"'
