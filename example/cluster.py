@@ -31,7 +31,7 @@ for i,l in enumerate(labos):
 		end     = start + filesPc + 1 
 		filesCP = [inPath + 't' + str(x) + '.csv' for x in range(start,end)]
 
-		fullLineCp = ["ssh " + str(ip) + " -t cp " + x + '/tmp/' for x in filesCP]
+		fullLineCp = ["ssh " + str(ip) + " -t cp " + x + ' /tmp/' for x in filesCP]
 
 		tmp = [os.system(x) for x in fullLineCp]
 		inPath	= '"/tmp/"'
