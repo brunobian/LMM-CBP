@@ -28,10 +28,17 @@ for i,l in enumerate(labos):
 		nCores	= '4'
 		nFiles	= str(filesPc)
 		nohupOut= '"\"~/Bruno_R/nohup/' + str(l) + "/" + str(c) + '_\""'
-		start   = str(filesPc * count + 1) 
+		start   = filesPc * count + 1
+		end     = start + filesPc + 1 
+		filesCP = [inPath + 't' + str(x) + '.csv' for x in range(start,end)]
+
+		fullLineCp = ["ssh " + str(ip) + " -t cp " + x + '/tmp/' for x in filesCP]
+
+		tmp = [os.system(x) for x in fullLineCp]
+		inPath	= '"/tmp/"'
 
 		pars = [nIter, inPath, outPath, modType, rPath, fixEf,
-		        ranEf, perPath, perVar, cstPath, nCores, nFiles, nohupOut, start]
+		        ranEf, perPath, perVar, cstPath, nCores, nFiles, nohupOut, str(start)]
 
 		parStr = " ".join(pars)
 		fullLine = "ssh " + str(ip) + " -t sh ~/CuBaPeTo/bash_functions/runParallelCores.sh " + parStr
