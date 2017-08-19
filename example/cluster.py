@@ -40,7 +40,7 @@ for i,l in enumerate(labos):
 		        ranEf, perPath, perVar, cstPath, nCores, nFiles, nohupOut, str(start)]
 
 		parStr = " ".join(pars)
-		fullLine = "ssh " + str(ip) + " -t sh ~/CuBaPeTo/bash_functions/runParallelCores.sh " + parStr
+		fullLine = "ssh " + str(ip) + " -t sh ~/CuBaPeTo2/bash_functions/runParallelCores.sh " + parStr
                 
 		#print fullLine
 		os.system(fullLine)
