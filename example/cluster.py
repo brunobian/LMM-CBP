@@ -36,8 +36,8 @@ for i,l in enumerate(labos):
 		tmp = [os.system(x) for x in fullLineCp]
 		inPath	= '"/tmp/"'
 
-		pars = [nIter, inPath, outPath, modType, rPath, fixEf,
-		        ranEf, perPath, perVar, cstPath, nCores, nFiles, nohupOut, str(start)]
+		pars = [nIter,   inPath, outPath, modType, rPath,  fixEf,    ranEf, 
+				perPath, perVar, cstPath, nCores,  nFiles, nohupOut, str(start)]
 
 		parStr = " ".join(pars)
 		fullLine = "ssh " + str(ip) + " -t sh ~/CuBaPeTo2/bash_functions/runParallelCores.sh " + parStr
