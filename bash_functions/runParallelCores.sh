@@ -27,10 +27,10 @@ do
 	tEnd=$(( $tStart + $nRun-1))
 	
 	# if mod(nFiles,nCores) ~= 0, set last core to last file
-	if [ "$x" -eq "$nCores" ] 
-	then
-		tEnd=$(( tStart + $nFiles))
-	fi
+	#if [ "$x" -eq "$nCores" ] 
+	#then
+	#	tEnd=$(( tStart + $nFiles))
+	#fi
 		
 	echo "Starting in core $x with files $tStart to $tEnd"
 
