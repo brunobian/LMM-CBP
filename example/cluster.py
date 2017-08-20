@@ -36,6 +36,9 @@ for i,l in enumerate(labos):
 		tmp = [os.system(x) for x in fullLineCp]
 		inPath	= '"/tmp/"'
 
+		if i > 0 and j > 0:
+			perPath = '"/tmp/"'
+
 		pars = [nIter,   inPath, outPath, modType, rPath,  fixEf,    ranEf, 
 				perPath, perVar, cstPath, nCores,  nFiles, nohupOut, str(start)]
 
@@ -44,5 +47,12 @@ for i,l in enumerate(labos):
                 
 		#print fullLine
 		os.system(fullLine)
+		
+		# Move permutations to temp to make it faster
+		if i == 0 and j == 0:
+			Line = 'cp ' + perPath.replace('"','')  + 'perms_' + perVar.replace('"','') + nIter + ' /tmp/'
+			os.system(Line)
+
+
 		count = count + 1
 
