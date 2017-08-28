@@ -20,7 +20,8 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
       tmp <- read.csv(fileName, comment.char = "", sep=";") 
       
       # Find out the amount of electrodes in DataSet
-      ### [MEJORAR PARA QUE AGARRE SOLO LOS CAMPOS DE ELECTRODOS] ###
+      ### [MEJORAR PARA QUE AGARRE SOLO LOS CAMPOS DE ELECTRODOS ###
+      ### sin posibilidad de que agarre otra cosa] ###
       cols       <- colnames(tmp)
       electCols  <- grepl('E[0-9]+', cols)
       nElect     <- sum(electCols)
@@ -37,10 +38,24 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
         
         # Iterate over permutations running the model for each electrode.
         for (iter in 1:nIter){ 
-          tmp[electrode] <- tmp[electrode][iterations[,iter], ]
+          tmp['permuted'] <- tmp[electrode][iterations[,iter], ]
           
           if (perType == 'lm'){
             out = lmElecTime(tmp, indE, variables, iter, nIter, out)   
+          
+          else if (perType == 'remef'){
+            # For the remef approach, the first model (orignal data) is LMM
+            if (iter == 1) {
+              out = lmmElecTime(tmp, indE, variables[1], iter, nIter, out)   
+              # After fitting that, remove random effects and store in original place
+              m = out$model
+              l = c(names(ranef(m)))
+              tmp[electrode]  <- remef(m, fix = NULL, ran = "all")
+            } else { 
+              # Now on, treat them with classical Linear Models
+              out = lmElecTime(tmp, indE, variables[2], iter, nIter, out)   
+            }
+              
           } else {
             out = lmmElecTime(tmp, indE, variables, iter, nIter, out)   
           }
