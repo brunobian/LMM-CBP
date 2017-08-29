@@ -10,6 +10,14 @@ filesPc  = totFiles / npcs
 count = 0
 for i,l in enumerate(labos):
 	print 'En el labo ' + str(l)
+
+	perPath	= '"~/Bruno_R/permutations/"'
+
+	if i>1:
+		Line = 'cp ' + perPath.replace('"','')  + 'perms_' + perVar.replace('"','') + nIter + ' /tmp/'
+		os.system(Line)
+		perPath = '"/tmp/"'
+
 	for j,c in enumerate(compus[i]):
 		print 'En la compu ' + str(c)
 
@@ -21,7 +29,6 @@ for i,l in enumerate(labos):
 		rPath	= '"~/CuBaPeTo2/R_functions/"'
 		fixEf	= '"\\"freq + palnum:tipo + pred:tipo\\""'
 		ranEf	= '"\\"(1|suj_id) + (1|pal)\\""'
-		perPath	= '"~/Bruno_R/permutations/"'
 		perVar	= '"across"'
 		cstPath	= '"~/Bruno_R/cstFuns/"'
 		nCores	= '4'
@@ -36,8 +43,6 @@ for i,l in enumerate(labos):
 		tmp = [os.system(x) for x in fullLineCp]
 		inPath	= '"/tmp/"'
 
-		if i > 0 and j > 0:
-			perPath = '"/tmp/"'
 
 		pars = [nIter,   inPath, outPath, modType, rPath,  fixEf,    ranEf, 
 				perPath, perVar, cstPath, nCores,  nFiles, nohupOut, str(start)]
