@@ -43,7 +43,7 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
           if (perType == 'lm'){
             out = lmElecTime(tmp, indE, variables, iter, nIter, out)   
           
-          else if (perType == 'remef'){
+          } else if (perType == 'remef'){
             # For the remef approach, the first model (orignal data) is LMM
             if (iter == 1) {
               out = lmmElecTime(tmp, indE, variables[1], iter, nIter, out)   
