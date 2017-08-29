@@ -1,8 +1,7 @@
 import os
 
-labos  = [6,7]
-compus = [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,22,23,24],	
-	  [1,2,3,4]]
+labos  = [2,6,7]
+compus = [[2,3,4],[1,4,7,8,10,12,13,14,15,18,19,20,22,23,24],[2,5,10,11,16,20,24,25]]
 
 npcs     = sum(len(c) for c in compus)
 totFiles = 104
@@ -17,8 +16,8 @@ for i,l in enumerate(labos):
 		ip      = '10.2.' + str(l) + "." + str(c)
 		nIter	= '500'
 		inPath	= '"~/Bruno_R/csv_103/"'
-		outPath	= '"~/lmm_results_500/across2/"'
-		modType	= '"lmm"'
+		outPath	= '"~/lmm_results_500/remef/"'
+		modType	= '"remef"'
 		rPath	= '"~/CuBaPeTo2/R_functions/"'
 		fixEf	= '"\\"freq + palnum:tipo + pred:tipo\\""'
 		ranEf	= '"\\"(1|suj_id) + (1|pal)\\""'
