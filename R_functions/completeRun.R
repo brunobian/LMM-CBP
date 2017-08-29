@@ -37,6 +37,8 @@ iterations <- generateIterMatrix(nIter, perVar, inPath, perPath)
 
 if (modType == 'lm') {
   variables   <- fixEf
+}else if (modType == 'remef') {
+  variables   <- c(paste0(fixEf, '+', ranEf), fixEf)
 } else {
   variables   <- paste0(fixEf, '+', ranEf)
 }
