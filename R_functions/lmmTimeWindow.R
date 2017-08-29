@@ -46,10 +46,12 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
           } else if (perType == 'remef'){
             # For the remef approach, the first model (orignal data) is LMM
             if (iter == 1) {
+              print(variables[1])
               out = lmmElecTime(tmp, indE, variables[1], iter, nIter, out)   
               # After fitting that, remove random effects and store in original place
               tmp[electrode]  <- remef(out$model, fix = NULL, ran = "all")
             } else { 
+              print(variables[2])
               # Now on, treat them with classical Linear Models
               out = lmElecTime(tmp, indE, variables[2], iter, nIter, out)   
             }
