@@ -48,9 +48,7 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
             if (iter == 1) {
               out = lmmElecTime(tmp, indE, variables[1], iter, nIter, out)   
               # After fitting that, remove random effects and store in original place
-              m = out$model
-              l = c(names(ranef(m)))
-              tmp[electrode]  <- remef(m, fix = NULL, ran = "all")
+              tmp[electrode]  <- remef(out$model, fix = NULL, ran = "all")
             } else { 
               # Now on, treat them with classical Linear Models
               out = lmElecTime(tmp, indE, variables[2], iter, nIter, out)   
