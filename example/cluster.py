@@ -5,8 +5,6 @@ compus = [[1,3,5,10,11,12,15,16,17,18],
 		  [1,2,13,18,19,20,23,24],
 		  [2,4,5,7,9,11,12,13]]
 
-labos = [7]
-compus = [[1]]
 npcs     = sum(len(c) for c in compus)
 totFiles = 104
 filesPc  = totFiles / npcs
