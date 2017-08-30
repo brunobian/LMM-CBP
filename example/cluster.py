@@ -3,8 +3,6 @@ import os
 labos  = [7]
 compus = [[2,4,5,7,9,11,12,13,15,16,17,21,22]]
 
-labos = [7]
-compus = [[1]]
 npcs     = sum(len(c) for c in compus)
 totFiles = 104
 filesPc  = totFiles / npcs
