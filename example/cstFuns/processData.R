@@ -18,7 +18,7 @@ processData <- function(dataSet) {
   
   # Transformo y centro variables
   dataSet$freq   <- log(dataSet$freq+1)
-  dataSet$length <- 1/(dataSet$length)
+  dataSet$length <- 1/(dataSet$lngth)
   dataSet$freq   <- scale(dataSet$freq,   center = TRUE, scale = FALSE)
   dataSet$pred   <- scale(dataSet$pred,   center = TRUE, scale = FALSE)
   dataSet$palnum <- scale(dataSet$palnum, center = TRUE, scale = FALSE)
