@@ -22,7 +22,15 @@ lmmElecTime <- function(dataSet, indE, variables, iter, nIter, out){
   
   # Calculate t-values from the model
   t_val   = effectsLmm  / sqrt(diag(vcov(thisLmm)))
-  
+
+  # If it still don't converge after the first check, set t_val = 0 (NS)
+  tt <- getME(thisLmm,"theta")
+  ll <- getME(thisLmm,"lower")
+  singularityCheck = min(tt[ll==0])
+  if (singularityCheck < 10e-8){
+	t_val = t_val * 0.0
+  }
+
   # Create array in the first iteration for the first electrode
   if (indE == 1 & iter == 1) {
     out <- list()
