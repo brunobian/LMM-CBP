@@ -3,6 +3,7 @@ processData <- function(dataSet) {
   
   # Limpio palabras que no quiero analizar
   dataSet <- dataSet[dataSet$palnum <= 10,] # Elimino las pals que están dsp de la 10ma
+  dataSet <- dataSet[dataSet$palnum >4,] # Elimino las pals que están antes de la 4ta
   dataSet <- dataSet[dataSet$bad_epoch == 0,] # Elimino los malos trials
   
   # Me quedo con 2 categorías y los factorizo: 0=proverbs; 1=common sentences
