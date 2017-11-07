@@ -1,7 +1,7 @@
 import os
 
-labos  = [4,7]
-compus = [[1,2,3,9,10,11,12,13,14,15,18,20,21,22],[1,2,3,4,5,6,7,8,9]]
+labos  = [6,7]
+compus = [[1,3,4,2,7,8,9,10,11,12,15,17,18,19,20,21,22,23],[1,2,3,4,5]]
 
 npcs     = sum(len(c) for c in compus)
 totFiles = 92
@@ -22,12 +22,12 @@ for i,l in enumerate(labos):
 		print 'En la compu ' + str(c)
 
 		ip      = '10.2.' + str(l) + "." + str(c)
-		nIter	= '250'
-		inPath	= '"~/Bruno_R/beta/"'
-		outPath	= '"~/lmm_results_500/freqbeta_suj/"'
+		nIter	= '200'
+		inPath	= '"~/Bruno_R/theta/"'
+		outPath	= '"~/lmm_results_500/freqtheta_suj/"'
 		modType	= '"lmm"'
 		rPath	= '"~/CuBaPeTo2/R_functions/"'
-		fixEf	= '"\\"freq + palnum:tipo + pred:tipo\\""'
+		fixEf	= '"\\"freq + palnum + tipo + pred\\""'
 		ranEf	= '"\\"(1|suj_id) + (1|pal)\\""'
 		perVar	= '"suj_id"'
 		cstPath	= '"~/CuBaPeTo2/example/cstFuns/"'
