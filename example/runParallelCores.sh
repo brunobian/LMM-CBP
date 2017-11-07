@@ -1,11 +1,11 @@
 nIter=0
 inPath="~/Bruno_R/alpha/"
-outPath="~/lmm_results_500/freqalpha_suj/"
+outPath="~/lmm_results_500/freqalpha/"
 modType="lmm"
 rPath=~/Repos/CuBaPeTo2/R_functions/
 fixEf="freq + pred + tipo + pred:tipo"
 ranEf="(1|suj_id) + (1|pal)"
-perVar=suj_id
+perVar="suj_id"
 perPath="~/Bruno_R/permutations/"
 cstPath="~/Repos/CuBaPeTo2/example/cstFuns/"
 nCores=4
