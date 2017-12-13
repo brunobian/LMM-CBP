@@ -1,22 +1,14 @@
 processData <- function(dataSet) {
- 
-  #dataSet[dataSet$palnum<=-1,]=-1
-  #dataSet[dataSet$palnum>= 1,]= 1
- 
-  dataSet$tipo   <- as.factor(dataSet$tipo)
-  dataSet$palnum <- as.factor(dataSet$palnum)
   
-  
-<<<<<<< HEAD
-=======
   # Limpio palabras que no quiero analizar
   dataSet <- dataSet[dataSet$palnum <= 10,] # Elimino las pals que están dsp de la 10ma
-  dataSet <- dataSet[dataSet$palnum >4,] # Elimino las pals que están antes de la 4ta
   dataSet <- dataSet[dataSet$bad_epoch == 0,] # Elimino los malos trials
   
-  # Me quedo con 2 categorías y los factorizo: 0=proverbs; 1=common sentences
-  dataSet$tipo[dataSet$tipo >  0] = 1
-
+  # Me quedo solo con proverbs en MJ-1 hasta MJ+1
+  dataSet = dataSet[dataSet$tipo ==  0,]
+  # dataSet = dataSet[dataSet$MaxJump >= -1,]
+  # dataSet = dataSet[dataSet$MaxJump <=  1,]
+  
   # Genero variable dummy para oraicones comunes y proverbios
   # dataSet$tipo_Dummy_common  = dataSet$tipo
   # dataSet$tipo_Dummy_common[dataSet$tipo_Dummy_common == 0] = NA
@@ -24,6 +16,7 @@ processData <- function(dataSet) {
   # dataSet$tipo_Dummy_proverb[dataSet$tipo_Dummy_proverb == 0] = NA
   # 
   dataSet$tipo <- as.factor(dataSet$tipo)
+  dataSet$MaxJump <- as.factor(dataSet$MaxJump)
   
   # Transformo y centro variables
   dataSet$freq   <- log(dataSet$freq+1)
@@ -39,7 +32,6 @@ processData <- function(dataSet) {
   # dataSet$pred_common  <- dataSet$pred * dataSet$tipo_Dummy_common
   # dataSet$pred_proverb <- dataSet$pred * dataSet$tipo_Dummy_proverb
   # 
->>>>>>> 2630bb914085c9719b2bedaacba3dbe8757f647a
   return(dataSet)
   
 }

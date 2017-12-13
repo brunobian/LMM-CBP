@@ -3,7 +3,7 @@ lmmElecTime <- function(dataSet, indE, variables, iter, nIter, out){
   
   electrode = paste0('E', indE)
   model = paste0('permuted ~ ' , variables)
-  thisLmm <- lmer(model , data = dataSet, REML = FALSE) 
+  thisLmm <- lmer(model , data = dataSet, REML = FALSE)
               
   
   # If it don't converge, continue iterating
