@@ -1,23 +1,13 @@
 nIter=0
-<<<<<<< HEAD
-inPath="~/Bruno_R/alpha/"
-outPath="~/lmm_results_500/freqalpha/"
+inPath="~/Bruno_R/csv_103_posRel/"
+outPath="~/lmm_results_relPos/"
 modType="lmm"
 rPath=~/Repos/CuBaPeTo2/R_functions/
-fixEf="freq + pred + tipo + pred:tipo"
-ranEf="(1|suj_id) + (1|pal)"
-perVar="suj_id"
-=======
-inPath="/media/brunobian/DataNew/Proverbs_wxw/csv_103/"
-outPath="/media/brunobian/DataNew/Proverbs_wxw/results/relPos"
-modType="lmm"
-rPath=~/Documentos/Repos/CuBaPeTo2/R_functions/
 fixEf="freq + palnum + MaxJump"
 ranEf="(1|suj_id)"
 perVar=suj_id
->>>>>>> ac3ad2948a233478567e47a96edd472160e27a8f
 perPath="~/Bruno_R/permutations/"
-cstPath="~/Documentos/Repos/CuBaPeTo2/example/cstFuns/"
+cstPath="~/Repos/CuBaPeTo2/example/cstFuns/"
 nCores=4
 nohupOut=~/Bruno_R/nohup/
 nFiles=104

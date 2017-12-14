@@ -6,8 +6,8 @@ processData <- function(dataSet) {
   
   # Me quedo solo con proverbs en MJ-1 hasta MJ+1
   dataSet = dataSet[dataSet$tipo ==  0,]
-  # dataSet = dataSet[dataSet$MaxJump >= -1,]
-  # dataSet = dataSet[dataSet$MaxJump <=  1,]
+  dataSet = dataSet[dataSet$MaxJump >= -1,]
+  dataSet = dataSet[dataSet$MaxJump <=  1,]
   
   # Genero variable dummy para oraicones comunes y proverbios
   # dataSet$tipo_Dummy_common  = dataSet$tipo
