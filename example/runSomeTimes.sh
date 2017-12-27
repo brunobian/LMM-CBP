@@ -1,22 +1,22 @@
-nIter=250
-inPath="~/Bruno_R/alpha/"
-outPath="~/lmm_results_500/freqalpha_suj/"
+nIter=200
+inPath="~/Bruno_R/csv_103_posRel/"
+outPath="~/lmm_results/"
 modType="lmm"
-rPath=~/Repos/CuBaPeTo2/R_functions/
-fixEf="freq + palnum:tipo + pred:tipo"
-ranEf="(1|suj_id) + (1|pal)"
+rPath=~/CuBaPeTo2/R_functions/
+fixEf="freq + palnum + MaxJump"
+ranEf="(1|suj_id)"
 perVar=suj_id
 perPath="~/Bruno_R/permutations/"
-cstPath="~/Repos/CuBaPeTo2/example/cstFuns/"
-nCores=4
-Files="33 34 35 39"
+cstPath="~/CuBaPeTo2/example/cstFuns/"
+nCores=1
+Files=" 93 "
 nohupOut=~/Bruno_R/nohup/
 
 INDEX=1
 for x in $Files
 do
         # start file
-        tStart=$(( x/1 ))
+        tStart=$x
         
  	# end file
         tEnd=$tStart
@@ -42,4 +42,4 @@ do
 	INDEX=$(( INDEX + 1 )) 
 
 done 
-~                  
+               
