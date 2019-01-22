@@ -1,4 +1,4 @@
-# CuBaPeTo code
+# LMM-CBP code
 
 Code for running cluster-based permutation test on EEG data using fieldtrip toolbox for Matlab and lme4 for R. The interaction between both programs depends on bash code implemented in Linux. This code allows to parallelize in different cores of one computer and in different computers.
 
@@ -6,7 +6,7 @@ This code consist in functions for exporting fieldtrip structures into CSV forma
 
 # Structure
 
-- **CuBaPeTo/**: library
+- **LMM-CBP/**: library
   - **bash_functions/**: functions for the interaction between Matlab and R
     - **run_models.sh**: 
     - **runParallelCluster.sh**: 
