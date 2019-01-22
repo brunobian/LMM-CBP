@@ -8,9 +8,9 @@ This code consist in functions for exporting fieldtrip structures into CSV forma
 
 - **LMM-CBP/**: library
   - **bash_functions/**: functions for the interaction between Matlab and R
-    - **run_models.sh**: 
-    - **runParallelCluster.sh**: 
-    - **runParallelCores.sh**: 
+    - **run_models.sh**
+    - **runParallelCluster.sh**
+    - **runParallelCores.sh**
 
   - **m_functions/**: Function for exporting fieldtrip data and to analyse LMM results
     - **lm_exportErpCsv.m**
@@ -26,14 +26,13 @@ This code consist in functions for exporting fieldtrip structures into CSV forma
     - **lm_maxSum.m**
 
   - **R_functions/**: Functions for running LMM
-    - **complete_run.R**
     - **generateIterMatrix.R**
     - **lmmElecTime.R**
     - **completeRun.R**
     - **lmElecTime.R**
     - **lmmTimeWindow.R**
  
-  - **example/**: 
+  - **example/**: tutorial data and scripts 
 
 
 
