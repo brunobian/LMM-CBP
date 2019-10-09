@@ -17,13 +17,13 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
       # Load file
       fileName = paste(inPath, 't', iTime, '.csv', sep = '')
       print(paste0('Loading file T', iTime))
-      tmp <- read.csv(fileName, comment.char = "", sep=";") 
+      tmp <- read.csv(fileName, quote = "", sep=";") 
       
       # Find out the amount of electrodes in DataSet
       ### [MEJORAR PARA QUE AGARRE SOLO LOS CAMPOS DE ELECTRODOS ###
       ### sin posibilidad de que agarre otra cosa] ###
       cols       <- colnames(tmp)
-      electCols  <- grepl('E[0-9]+', cols)
+      electCols  <- grepl('^E[0-9]+', cols)
       nElect     <- sum(electCols)
       
       # Custom function for data preprocessing

@@ -31,8 +31,8 @@ try
         % Generate header, only for the firts subject 
         if su == 1
             % Generate eletrode-columns' names
-            e = strjoin(sep,arrayfun(@(x) ['E' num2str(x)], 1:128, ...
-                                     'UniformOutput', false));
+            e = strjoin(arrayfun(@(x) ['E' num2str(x)], 1:128, ...
+                                     'UniformOutput', false),sep);
             
             % Generate the header with the the time as last column
             header =  [coVarNames, sep, 'time', sep, e];

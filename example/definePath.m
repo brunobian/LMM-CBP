@@ -3,8 +3,7 @@ function [lm_Conf, SUJ]= definePath(lm_Conf)
     addpath(genpath(lm_Conf.eeglabpath),'-end');
     
     lm_Conf.datapath  = [lm_Conf.path 'example/data_ex/']; 
-    
-    
+
     tmp = dir([lm_Conf.datapath  '/*.mat']); 
     fileNames = {tmp.name};
     

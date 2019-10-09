@@ -56,19 +56,20 @@ nFilesStr = num2str(nFiles);
 sep = ' ';
 q = '"';
 command = ['sh' sep bashPath 'runParallelCores.sh' sep ...
-            q nIterStr  q sep ... args[3]
-            q inPath    q sep ... args[4]
-            q outPath   q sep ... args[5]
-            q modType   q sep ... args[6]
-            q rPath     q sep ... args[7]
-            q fixEf     q sep ... args[8]
-            q ranEf     q sep ... args[9]
-            q perPath   q sep ... args[10]
-            q perVar    q sep ... args[11]
-            q cstPath   q sep ... args[12]
-            q nCoresStr q sep ... args[13]
-            q nFilesStr q sep ... args[14]
-            q nohupOut  q sep ... args[14]
+            q nIterStr  q sep ... args[1]
+            q inPath    q sep ... args[2]
+            q outPath   q sep ... args[3]
+            q modType   q sep ... args[4]
+            q rPath     q sep ... args[5]
+            q fixEf     q sep ... args[6]
+            q ranEf     q sep ... args[7]
+            q perPath   q sep ... args[8]
+            q perVar    q sep ... args[9]
+            q cstPath   q sep ... args[10]
+            q nCoresStr q sep ... args[11]
+            q nFilesStr q sep ... args[12]
+            q nohupOut  q sep ... args[13]
+            q num2str(1) q sep ... args[14]
             ];     
 
 % Run the command trough bash

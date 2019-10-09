@@ -8,7 +8,7 @@ generateIterMatrix <- function(nIter, perVar, inPath, perPath){
     
     # Load t1.csv as example for calculating amount of rows
     file_name = paste(inPath, 't1.csv', sep = '')         
-    tmp <- read.csv(file_name, comment.char = "", sep=";") 
+    tmp <- read.csv(file_name, quote = "", sep=";") 
 
     # Custom function for data preprocessing
     # It is important to apply same process here than in th final analysis, 
@@ -27,19 +27,21 @@ generateIterMatrix <- function(nIter, perVar, inPath, perPath){
     # Generate permutations columns within the random effect in perVar
     # if perVar == 'across' -> permutate across all random Variables
     
-    for (iter in 1:nIter){ 
-      if (perVar == 'across') {
-        thisIter = sample(s)
-        iterations <- cbind(iterations, thisIter)
-      } else {
-        perVarUn = unique(tmp[[perVar]])
-	      thisIter = matrix(NA, L, 1)
-        for (i in 1:length(perVarUn)){	
-      	  iPerVar = perVarUn[i]
-      	  indThisIter = s[tmp[[perVar]] == iPerVar]
-      	  thisIter[indThisIter] = sample(indThisIter)
+    if (nIter>0){
+      for (iter in 1:nIter){ 
+        if (perVar == 'across') {
+          thisIter = sample(s)
+          iterations <- cbind(iterations, thisIter)
+        } else {
+          perVarUn = unique(tmp[[perVar]])
+          thisIter = matrix(NA, L, 1)
+          for (i in 1:length(perVarUn)){	
+            iPerVar = perVarUn[i]
+            indThisIter = s[tmp[[perVar]] == iPerVar]
+            thisIter[indThisIter] = sample(indThisIter)
+          }
+          iterations <- cbind(iterations, thisIter)
         }
-        iterations <- cbind(iterations, thisIter)
       }
     }
     
