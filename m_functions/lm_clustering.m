@@ -42,16 +42,24 @@ function [clusters, pval] = lm_clustering(permToLoad, lm_Conf, chans)
 			% Results from permutations
             tval_r = values.t.(v)(:, :, 2:end);
             
-            cfg.tail = 1;
-            cfg.clusteralpha   = 0.05;
-            
-            if cfg.tail == -1
+%             cfg.tail = 1;
+%             cfg.clusteralpha   = 0.05;
+%           
+            tail = lm_Conf.tail;
+            if lm_Conf.tail == -1
                 tn = tails{1}; 
-            else
+            elseif lm_Conf.tail == 1
                 tn = tails{2}; 
+            elseif lm_Conf.tail == 0    
+                tn = tails{1}; 
+                lm_Conf.tail = -1;    
+                [clusters.(v).(tn) pval.(v).(tn) sumMaxIter.(v).(tn)] = lm_cbpt(tval_r, tval, lm_Conf, chans);
+                tn = tails{2};    
+                lm_Conf.tail = 1;
             end
             
             [clusters.(v).(tn) pval.(v).(tn) sumMaxIter.(v).(tn)] = lm_cbpt(tval_r, tval, lm_Conf, chans);
+            lm_Conf.tail = tail;
         end
         
         save([lm_Conf.matricesLoadedPath '/clustersNum_' permType], 'clusters')

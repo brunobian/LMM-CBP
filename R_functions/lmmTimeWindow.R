@@ -20,8 +20,6 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
       tmp <- read.csv(fileName, quote = "", sep=";") 
       
       # Find out the amount of electrodes in DataSet
-      ### [MEJORAR PARA QUE AGARRE SOLO LOS CAMPOS DE ELECTRODOS ###
-      ### sin posibilidad de que agarre otra cosa] ###
       cols       <- colnames(tmp)
       electCols  <- grepl('^E[0-9]+', cols)
       nElect     <- sum(electCols)
@@ -33,7 +31,7 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
       out <- list()
       for (indE in 1:nElect) {
         electrode = paste0('E', indE)
-	      print(electrode)
+	      #print(electrode)
         nIter = dim(iterations)[2]
         
         # Iterate over permutations running the model for each electrode.
@@ -41,21 +39,21 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
           tmp['permuted'] <- tmp[electrode][iterations[,iter], ]
           
           if (perType == 'lm'){
-            out = lmElecTime(tmp, indE, variables, iter, nIter, out)   
+            out = lmElecTime(tmp, indE, variables, iter, nIter, nElect, out)   
           
           } else if (perType == 'remef'){
             # For the remef approach, the first model (orignal data) is LMM
             if (iter == 1) {
-              out = lmmElecTime(tmp, indE, variables[1], iter, nIter, out)   
+              out = lmmElecTime(tmp, indE, variables[1], iter, nIter, nElect, out)   
               # After fitting that, remove random effects and store in original place
               tmp[electrode]  <- remef(out$model, fix = NULL, ran = "all")
             } else { 
               # Now on, treat them with classical Linear Models
-              out = lmElecTime(tmp, indE, variables[2], iter, nIter, out)   
+              out = lmElecTime(tmp, indE, variables[2], iter, nIter, nElect, out)   
             }
               
           } else {
-            out = lmmElecTime(tmp, indE, variables, iter, nIter, out)   
+            out = lmmElecTime(tmp, indE, variables, iter, nIter, nElect, out)   
           }
           
         }
@@ -72,6 +70,8 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
       # Save slopes, t_values and AICs
       for (iEf in seq(1, lEf)) {
         variable = names(effectsLMM[iEf])
+        variable = gsub(':','$',variable)
+        
         f = paste0(outPath, 'p_', variable, '_T', iTime)
         write.table(slopes[,,iEf], f, sep = ",", row.names = FALSE, col.names = FALSE)  
         

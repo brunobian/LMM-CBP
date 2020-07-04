@@ -1,5 +1,5 @@
 # This function run a LMM for a specific time and electrode.
-lmmElecTime <- function(dataSet, indE, variables, iter, nIter, out){
+lmmElecTime <- function(dataSet, indE, variables, iter, nIter, nElect, out){
   
   electrode = paste0('E', indE)
   model = paste0('permuted ~ ' , variables)
@@ -34,9 +34,9 @@ lmmElecTime <- function(dataSet, indE, variables, iter, nIter, out){
   # Create array in the first iteration for the first electrode
   if (indE == 1 & iter == 1) {
     out <- list()
-    out$slopes      = array(NA, c(nIter, 128, length(effectsLmm)))
-    out$t_values    = array(NA, c(nIter, 128, length(effectsLmm)))
-    out$AIC_mat     = array(NA, c(nIter, 128))
+    out$slopes      = array(NA, c(nIter, nElect, length(effectsLmm)))
+    out$t_values    = array(NA, c(nIter, nElect, length(effectsLmm)))
+    out$AIC_mat     = array(NA, c(nIter, nElect))
     out$effects     = effectsLmm
     out$model       = thisLmm
   }

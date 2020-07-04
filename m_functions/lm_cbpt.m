@@ -43,7 +43,7 @@
 % 2017-01-10 Bruno Bianchi
 % 2017-01-12 Juan Kamienkowski. cfg was included as new optional input.
 
-function [clustersOut, pval, thisSumMaxIter] = lm_cbpt( tval_r, tval, ....
+function [clusters_out, pval, thisSumMaxIter] = lm_cbpt( tval_r, tval, ....
                                                         lm_Conf, chans)
 
 
@@ -128,7 +128,7 @@ maxsum_perm = quantile(thisSumMaxIter, alpha);
 
 %% 6. Busco clusters para los datos posta (repito 1-4)
 tval_sig = tval > lm_Conf.alpha;
-[percolMat, N] = percolaciones_completas(tval_sig, nhbr, lm_Conf);
+[percolMat, N] = lm_completePercolations(tval_sig, nhbr, lm_Conf);
 
 sums = [];
 for iN = 1:N

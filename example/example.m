@@ -3,9 +3,10 @@ clc
 clear all
 close all
 lm_Conf = struct();
-lm_Conf.path = '~/Documentos/Repos/CuBaPeTo/';
+lm_Conf.path = '/media/brunobian/ExtraDrive1/Repos/LMM-CBP/';
 lm_Conf.eeglabpath  = '/home/brunobian/Documentos/toolbox/eeglab11_0_3_1b';
 lm_Conf.custonFc = './cstfuns';
+lm_Conf.datapath = './data_ex';
 
 cd([lm_Conf.path 'example/'])
 addpath(genpath(lm_Conf.path))

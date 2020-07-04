@@ -22,7 +22,7 @@ function values = lm_loadLmmData(permToLoad, lm_Conf)
         
         % Load permutation results
         for iFile = 1:length(fileNames)
-       
+       	try
             % identify wich type of file is loading and split names
             thisName = fileNames{iFile};
             splited = regexp(thisName,'_','split');
@@ -37,7 +37,9 @@ function values = lm_loadLmmData(permToLoad, lm_Conf)
                     vari = splited{2};
                     vari = regexprep(vari, '(', '');
                     vari = regexprep(vari, ')', '');
-                    vari = regexprep(vari, ':', '_');
+                    vari = regexprep(vari, '\$', '_');
+                    vari = regexprep(vari, 'sntType-0.5', 'prov');
+                    vari = regexprep(vari, 'sntType0.5', 'common');
                     iTime= splited{3}; 
                 end
             elseif strcmpi('AIC', val) % AIC
@@ -61,8 +63,11 @@ function values = lm_loadLmmData(permToLoad, lm_Conf)
                                                         [sizeVals(1), ...
                                                         1, ...
                                                         sizeVals(2)]);
+        
+        catch ME
+            keyboard
         end
-
+end
         save([lm_Conf.matricesLoadedPath '/' permType], 'values')
     end
     fprintf('Finished model loading\n')
