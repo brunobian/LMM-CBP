@@ -16,7 +16,7 @@
 % lm_Conf = config struct from the toolbox
 
 
-function lm_Conf = lm_exportErpCsv(data, EEG, su, sep, lm_Conf)
+function lm_Conf = lm_exportErpCsv(data, EEG, su, lm_Conf)
 %%    
 try
     fprintf('Exporting EEG data from subject %0.0f to CSV \n', su)
@@ -24,12 +24,11 @@ try
 
     cols= arrayfun(@(x) ['E' num2str(x)], 1:size(EEG.data,1), ...
                                  'UniformOutput', false);
-    fn_tmp = [pth '/tmp.csv'];    
+        
 
     % Generate one file per time sample
     lm_Conf.nTimes = size(EEG.times,2);
     for iTime = 1:lm_Conf.nTimes 
-        filename = [pth '/t' num2str(iTime) '.csv'];    
         
         amp = array2table(squeeze(EEG.data(:, iTime, :))',...
             'VariableNames', cols);
@@ -38,19 +37,40 @@ try
                       'VariableNames',{'time'});
         
         T = [times data amp];
-
-        if su == 1
-            writetable(T, filename, 'Delimiter', sep)
-        else
-            writetable(T,  fn_tmp, 'WriteVariableNames', 0, 'Delimiter', sep)
-            system(['cat ' fn_tmp ' >> ' filename]);
+        
+        if strcmpi(lm_Conf.export, 'csv')
+            fn_tmp = [pth '/tmp.csv'];
+            export_csv(T, pth, iTime, fn_tmp, lm_Conf.sep, su);
+        elseif strcmpi(lm_Conf.export,'table')
+            export_table(T, pth, iTime, su)
         end
     end
     
 catch ME
     keyboard
 end
-if su ~= 1
+if su ~= 1 && strcmpi(lm_Conf.export, 'csv')
     system(['rm ' fn_tmp]);
 end
+end
+
+function export_csv(T, pth, iTime, fn_tmp, sep, su)
+    filename = [pth '/t' num2str(iTime) '.csv'];    
+    if su == 1
+        writetable(T, filename, 'Delimiter', sep)
+    else
+        writetable(T,  fn_tmp, 'WriteVariableNames', 0, ...
+                   'Delimiter', sep)
+        system(['cat ' fn_tmp ' >> ' filename]);
+    end
+end
+function export_table(T, pth, iTime, su)
+    filename = [pth '/t' num2str(iTime) '.mat'];
+    if su == 1
+        save(filename, 'T')
+    else
+        T2 = load(filename); T2 = T2.T;
+        T  = [T2;T];
+        save(filename, 'T')
+    end
 end

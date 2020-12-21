@@ -39,6 +39,9 @@ do
     cmdR="$rPath"completeRun.R
 	
 	nohup Rscript "$cmdR" "$tStart" "$tEnd" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
+	
+	#nohup matlab -nodisplay -nodesktop -nojvm -r 'load cfg.mat; addpath(cfg.mPath); lm_completRun(cfg); exit;'  > $nhOut &
+
 
     #For the first core, I wait for the generation of the permutation 
     # matrix. 30s should be enough. 
