@@ -4,6 +4,9 @@ if isa(cfg, 'char')
     load(cfg)
 end
 
+maxNumCompThreads = cfg.maxNumCompThreads;
+
+
 tStart = tic;
 
 % Generate new permutation matrix or load an existing one
