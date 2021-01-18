@@ -51,7 +51,7 @@ for iTime = cfg.tStart:cfg.tEnd
 %                  out = lmElecTime(tmp, indE, variables[2], iter, nIter, nElect, out)   
 %               end
             elseif strcmpi(cfg.modType,'lmm')
-                out = lm_lmmElecTime(T, indE, variables, iter, nIter, nElect, out);   
+                out = lm_lmmElecTime(T, indE, variables, iter, nIter, nElect, cfg.categoricals, out);   
             else 
                 fprintf('perType incorrect: select lm, remef, or lmm\n')
             end
@@ -66,9 +66,11 @@ for iTime = cfg.tStart:cfg.tEnd
     lEf        = length(effectsLMM);
  
     % Save slopes, t_values and AICs
+
     for iEf = 1:lEf 
         variable = effectsLMM{iEf};
         variable = strrep(variable,':','$');
+        variable = strrep(variable,'_','');
         
         f = [cfg.outPath, 'p_', variable, '_T', num2str(iTime)];
         writetable(array2table(slopes(:,:,iEf)), f, ...

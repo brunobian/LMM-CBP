@@ -1,10 +1,15 @@
-function out = lm_lmmElecTime(T, indE, variables, iter, nIter, nElect, out)
+function out = lm_lmmElecTime(T, indE, variables, iter, nIter, nElect, categoricals, out)
 
     T.permuted = double(T.permuted);
+    for i = 1:length(categoricals)
+        c = categoricals{i}; 
+        T.(c) = categorical(T.(c));
+    end
 
     electrode = ['E', num2str(indE)];
     model     = ['permuted ~ ' , variables];
-    thisLmm = fitlme(T, model);
+%     keyboard
+    thisLmm = fitlme(T, model, 'DummyVarCoding', 'full');
 
     %   # If it don't converge, continue iterating
 %   # https://rstudio-pubs-static.s3.amazonaws.com/33653_57fc7b8e5d484c909b615d8633c01d51.html

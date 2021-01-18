@@ -43,7 +43,6 @@ for iCore = 1:cfg.nCores
     output    = ['> ' cfg.nhoPath '/core' num2str(iCore) ' &'];
     
     command = ['nohup' matlab options functions output];
-    keyboard
     system(command);
 
     if iCore==1; 
