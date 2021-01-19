@@ -3,6 +3,7 @@ function lm_lmmTimeWindow(variables, iterations, cfg)
 fprintf('Starting to run form T%d to T%d\n',cfg.tStart,cfg.tEnd)
 for iTime = cfg.tStart:cfg.tEnd
     tStart = tic;
+    keyboard
     
     % Check if this time CSV file was alredy run
     destfile =  [cfg.outPath, 'AIC_T', iTime];
