@@ -22,14 +22,15 @@
 % lm_Conf = config struct from the toolbox
 
 function lm_parallelRunLMM_m(cfg)
-
+maxT = cfg.tEnd;
 for iCore = 1:cfg.nCores 
     
     fprintf('Starting on Core #%d\n', iCore)
     cfg.tStart  = cfg.tStart + (iCore-1)* cfg.timerPerCore;
-    cfg.tEnd    = cfg.tStart +  iCore   * cfg.timerPerCore - 1;
+    cfg.tEnd    = cfg.tStart +  (iCore   * cfg.timerPerCore) - 1;
+
     if iCore==cfg.nCores; 
-        cfg.tEnd = cfg.nTimes;
+        cfg.tEnd = maxT;
     end
     
     cfgpath = [cfg.cfgPath, num2str(iCore), '.mat'];
