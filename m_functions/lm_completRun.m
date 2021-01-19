@@ -4,7 +4,7 @@ if isa(cfg, 'char')
     load(cfg)
 end
 
-maxNumCompThreads = cfg.maxNumCompThreads;
+maxNumCompThreads(cfg.maxNumCompThreads);
 
 
 tStart = tic;
