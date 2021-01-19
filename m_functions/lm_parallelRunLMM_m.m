@@ -26,8 +26,8 @@ function lm_parallelRunLMM_m(cfg)
 for iCore = 1:cfg.nCores 
     
     fprintf('Starting on Core #%d\n', iCore)
-    cfg.tStart  = cfg.tStart + (iCore-1)*cfg.timerPerCore;
-    cfg.tEnd    = cfg.tStart + iCore * cfg.timerPerCore;
+    cfg.tStart  = cfg.tStart + (iCore-1)* cfg.timerPerCore;
+    cfg.tEnd    = cfg.tStart +  iCore   * cfg.timerPerCore - 1;
     if iCore==cfg.nCores; 
         cfg.tEnd = cfg.nTimes;
     end
