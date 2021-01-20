@@ -26,8 +26,9 @@ for iTime = cfg.tStart:cfg.tEnd
 
     out = [];
     for indE = 1:nElect
+        tStartElect = tic;
         electrode = ['E', num2str(indE)];
-        fprintf('%s\n',electrode)
+        fprintf('%s',electrode)
         nIter = size(iterations,2);
 
         % Iterate over permutations running the model for each electrode.
@@ -55,7 +56,10 @@ for iTime = cfg.tStart:cfg.tEnd
             else 
                 fprintf('perType incorrect: select lm, remef, or lmm\n')
             end
-        end      
+        end
+        tEndElect = toc(tStartElect);
+
+        fprintf('  finished in %.2f seconds\n', tEndElect);    
     end
     
     % Extract results
