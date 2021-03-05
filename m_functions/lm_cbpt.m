@@ -58,7 +58,7 @@ if ~isfield(lm_Conf,'tail')
                                 % both tails:     0 (not implemented)
 end
 if ~isfield(lm_Conf,'alpha')
-    lm_Conf.alpha = 2;      % alpha level of the permutation test
+    lm_Conf.alpha = 1.86;      % alpha level of the permutation test
                             % This is not p-value (0.05) like in FieldTrip,
                             % but t-values.
 
@@ -93,7 +93,7 @@ end
 if lm_Conf.tail == 1
     alpha = 1-lm_Conf.clusteralpha;
 elseif lm_Conf.tail == -1
-    alpha = lm_Conf.clusteralpha;
+    alpha = 1-lm_Conf.clusteralpha;
 else
     fprintf('ERROR: lm_config.tail -> have to be 1 o -1')
 end

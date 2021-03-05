@@ -14,7 +14,8 @@ iterations = lm_generateIterMatrix(cfg);
 if strcmpi(cfg.modType, 'lm')
 	variables = cfg.fixEf;
 elseif strcmpi(cfg.modType, 'remef')
-    variables = [[cfg.fixEf, '+', cfg.ranEf], cfg.fixEf];
+    variables = [cfg.fixEf, '+', cfg.ranEf];
+%     variables = [[cfg.fixEf, '+', cfg.ranEf], cfg.fixEf];
 elseif strcmpi(cfg.modType, 'lmm')
     variables = [cfg.fixEf, '+', cfg.ranEf];
 else

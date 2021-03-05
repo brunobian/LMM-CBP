@@ -25,7 +25,12 @@ for iPerm = 1:length(permToLoad)
     try
         % identify wich type of file is loading and split names
         thisName = fileNames{iFile};
-        t_val = csvread([lmmPathPerm thisName])';
+        
+        if strcmpi(lm_Conf.programRun, 'R')
+            t_val = csvread([lmmPathPerm thisName]);
+        elseif strcmpi(lm_Conf.programRun, 'matlab')
+            t_val = csvread([lmmPathPerm thisName])';
+        end
 
         if strcmpi(thisName(end-3:end),'.txt') || ...
            strcmpi(thisName(end-3:end),'.csv')
@@ -36,6 +41,7 @@ for iPerm = 1:length(permToLoad)
         val = splited{1};
         % Slopes or t_vals
         if ismember(val, 'pt')     
+%             t_val = t_val';
             if ismember('common', splited) || ismember('proverb', splited)
                 vari = [splited{2} '_' splited{3}];
                 iTime= splited{4}; 
@@ -63,7 +69,7 @@ for iPerm = 1:length(permToLoad)
             nFiles   = lm_Conf.nTimes;             
             values.(val).(vari) = nan(sizeVals(1), nFiles, sizeVals(2));
         end
-        
+
         values.(val).(vari)(:, iTime, :) = reshape(t_val, ...
                                                    [sizeVals(1), ...
                                                    1, ...

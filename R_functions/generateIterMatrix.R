@@ -7,9 +7,10 @@ generateIterMatrix <- function(nIter, perVar, inPath, perPath){
     print('Generating a new permutation matrix')
     
     # Load t1.csv as example for calculating amount of rows
-    file_name = paste(inPath, 't1.csv', sep = '')         
-    tmp <- read.csv(file_name, quote = "", sep=";") 
-
+    fileName = paste(inPath, 't2.csv', sep = '')
+    print(paste0('from file T2'))
+    tmp <- read.csv(fileName, quote = "", sep=";") 
+    
     # Custom function for data preprocessing
     # It is important to apply same process here than in th final analysis, 
     # in order to have the same dataset

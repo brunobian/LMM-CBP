@@ -3,7 +3,9 @@ lmElecTime <- function(dataSet, indE, variables, iter, nIter, out) {
 
   electrode = paste0('E', indE)
 
-  model = paste0(electrode,' ~ ' , variables)
+  # model = paste0(electrode,' ~ ' , variables) Creo que esto esta mal
+  model = paste0('permuted ~ ' , variables)
+  
   
   thisLm <- lm(model , data = dataSet)
   

@@ -71,7 +71,7 @@ command = ['sh' sep bashPath 'runParallelCores.sh' sep ...
             q nohupOut  q sep ... args[13]
             q num2str(1) q sep ... args[14]
             ];     
-
+       
 % Run the command trough bash
 system(command);
 

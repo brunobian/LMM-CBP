@@ -26,7 +26,7 @@ lmmTimeWindow <- function(tStart, tEnd, variables, iterations, perType, inPath, 
       
       # Custom function for data preprocessing
       tmp <- processData(tmp)
-  
+
       # Iterate over electrodes
       out <- list()
       for (indE in 1:nElect) {

@@ -52,12 +52,21 @@ function [etFollow, percolMat] =  lm_percolation(percolMat, nhbr, ...
         NhbElec  = tvalsSig(iNhbElec,it);
 
         % search for time neighbors (first and last are spetial cases)
-        if it == 1
+        if it == 1 
             iNhbTime = it+1;
+%             elseif it == 2 
+%                 iNhbTime = [it+1 it+2];
+%             elseif it == 3 
+%                 iNhbTime = [it+1 it+2 it+3];
         elseif it == size(tvalsSig,2)
             iNhbTime =  it-1;
+%             elseif it == (size(tvalsSig,2)-1)
+%                 iNhbTime = [it-2 it-1];
+%             elseif it == (size(tvalsSig,2)-2)
+%                 iNhbTime = [it-3 it-2 it-1];
         else
-            iNhbTime = [it-1, it+1];
+            iNhbTime = [it-1,it+1];
+%             iNhbTime = [it-3,it-2,it-1,it+1,it+2,it+3];
         end
         NhbTime = tvalsSig(ie,iNhbTime);
 

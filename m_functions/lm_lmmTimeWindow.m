@@ -40,8 +40,12 @@ for iTime = cfg.tStart:cfg.tEnd
                 break
 %                 out = lmElecTime(T, indE, variables, iter, nIter, nElect, out);   
             elseif strcmpi(cfg.modType,'remef')
-                fprintf('TRADUCIR\n')
-                break
+                if (iter == 1)
+                    out = lm_predictEffects(T, indE, variables, iter, nIter, nElect, cfg.categoricals, out);   
+                end
+               
+%                 fprintf('TRADUCIR\n')
+%                 break
 %               % For the remef approach, the first model (orignal data) is LMM
 %               if (iter == 1) 
 %                  out = lmmElecTime(tmp, indE, variables[1], iter, nIter, nElect, out)   
@@ -62,36 +66,48 @@ for iTime = cfg.tStart:cfg.tEnd
         fprintf('  finished in %.2f seconds\n', tEndElect);    
     end
     
-    % Extract results
-    effectsLMM = out.effects;
-    slopes     = out.slopes;      
-    t_values   = out.t_values;    
-    AIC_mat    = out.AIC_mat;     
-    lEf        = length(effectsLMM);
- 
-    % Save slopes, t_values and AICs
+    
+    if strcmpi(cfg.modType,'remef')
+        predichos   = squeeze(out.predicho);    
+        keyboard
 
-    for iEf = 1:lEf 
-        variable = effectsLMM{iEf};
-        variable = strrep(variable,':','$');
-        variable = strrep(variable,'_','');
-        
-        f = [cfg.outPath, 'p_', variable, '_T', num2str(iTime)];
-        writetable(array2table(slopes(:,:,iEf)), f, ...
+        f = [cfg.outPath, 'predichos_T', num2str(iTime)];
+        writetable(array2table(predichos(:,:)), f, ...
+                   'Delimiter', ',', ...
+                   'WriteVariableNames', 0) 
+    else
+    
+        % Extract results
+        effectsLMM = out.effects;
+        slopes     = out.slopes;      
+        t_values   = out.t_values;    
+        AIC_mat    = out.AIC_mat;     
+        lEf        = length(effectsLMM);
+
+        % Save slopes, t_values and AICs
+
+        for iEf = 1:lEf 
+            variable = effectsLMM{iEf};
+            variable = strrep(variable,':','$');
+            variable = strrep(variable,'_','');
+
+            f = [cfg.outPath, 'p_', variable, '_T', num2str(iTime)];
+            writetable(array2table(slopes(:,:,iEf)), f, ...
+                       'Delimiter', ',', ...
+                       'WriteVariableNames', 0) 
+
+            f = [cfg.outPath, 't_', variable, '_T', num2str(iTime)];
+            writetable(array2table(t_values(:,:,iEf)), f, ...
+                       'Delimiter', ',', ...
+                       'WriteVariableNames', 0) 
+        end
+
+        f = [cfg.outPath, 'AIC_T', num2str(iTime)];
+        writetable(array2table(AIC_mat), f, ...
                    'Delimiter', ',', ...
                    'WriteVariableNames', 0) 
 
-        f = [cfg.outPath, 't_', variable, '_T', num2str(iTime)];
-        writetable(array2table(t_values(:,:,iEf)), f, ...
-                   'Delimiter', ',', ...
-                   'WriteVariableNames', 0) 
     end
-
-    f = [cfg.outPath, 'AIC_T', num2str(iTime)];
-    writetable(array2table(AIC_mat), f, ...
-               'Delimiter', ',', ...
-               'WriteVariableNames', 0) 
-
     % Delelte data to save RAM space
     clear T
     

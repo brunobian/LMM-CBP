@@ -8,7 +8,7 @@ function out = lm_lmmElecTime(T, indE, variables, iter, nIter, nElect, categoric
 
     electrode = ['E', num2str(indE)];
     model     = ['permuted ~ ' , variables];
-%     keyboard
+
     thisLmm = fitlme(T, model, 'DummyVarCoding', 'full');
 
     %   # If it don't converge, continue iterating
