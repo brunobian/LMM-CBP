@@ -27,7 +27,10 @@ for iPerm = 1:length(permToLoad)
         thisName = fileNames{iFile};
         
         if strcmpi(lm_Conf.programRun, 'R')
-            t_val = csvread([lmmPathPerm thisName]);
+            t_val = csvread([lmmPathPerm thisName])';
+            if size(t_val,1)==1
+                t_val = t_val';
+            end
         elseif strcmpi(lm_Conf.programRun, 'matlab')
             t_val = csvread([lmmPathPerm thisName])';
         end
@@ -67,7 +70,8 @@ for iPerm = 1:length(permToLoad)
 
         if ~any(strcmpi(vari, fieldnames(values.(val))))
             nFiles   = lm_Conf.nTimes;             
-            values.(val).(vari) = nan(sizeVals(1), nFiles, sizeVals(2));
+%             values.(val).(vari) = nan(sizeVals(1), nFiles, sizeVals(2));
+            values.(val).(vari) = zeros(sizeVals(1), nFiles, sizeVals(2));
         end
 
         values.(val).(vari)(:, iTime, :) = reshape(t_val, ...

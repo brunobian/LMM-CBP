@@ -3,18 +3,14 @@
 # Read the arguments from bash call
 args = commandArgs(trailingOnly=TRUE)
 
-tStart     = as.numeric(args[1])
-tEnd       = as.numeric(args[2])
-nIter      = as.numeric(args[3])
-inPath     = args[4]
-outPath    = args[5]
-modType    = args[6]
-rPath      = args[7]
-fixEf      = args[8]
-ranEf      = args[9]
-perPath    = args[10]
-perVar     = args[11]
-cstPath    = args[12]
+tStart  = as.numeric(args[1])
+tEnd    = as.numeric(args[2])
+
+cfgPath = args[3]
+df=read.csv(cfgPath,header=FALSE, col.names=c("var","value"),colClasses = "character")
+for (i in 1:nrow(df)){assign(df$var[i], df$value[i])} 
+
+nIter      = as.numeric(nIter)
 
 total.start <- Sys.time()
 # Avoid warnnings

@@ -38,7 +38,9 @@ rPath    = strrep(lm_Conf.rFunctionsPath, '~', '$HOME');
 % Path where csv with permutation with the location of permutation matrices
 perPath  = strrep(lm_Conf.permutationMatPath, '~', '$HOME');  
 % Number of time files generated in lm_exportCsv.m
-nFiles   = lm_Conf.nTimes;              
+nFiles   = lm_Conf.nTimes;          
+% First time to run
+startTime= lm_Conf.startTime;
 % Random factor to permutate within if permutation is across or model
 % is lm, perVar = 'across'
 perVar   = lm_Conf.permutationVariable; 
@@ -51,6 +53,7 @@ outPath  = [outPath '/'];
 nIterStr  = num2str(nIter);
 nCoresStr = num2str(nCores);
 nFilesStr = num2str(nFiles);
+startTime = num2str(startTime);
 
 % Generate the str of commando to be run
 sep = ' ';
@@ -69,9 +72,31 @@ command = ['sh' sep bashPath 'runParallelCores.sh' sep ...
             q nCoresStr q sep ... args[11]
             q nFilesStr q sep ... args[12]
             q nohupOut  q sep ... args[13]
-            q num2str(1) q sep ... args[14]
+            q startTime q sep ... args[14]
             ];     
-       
+
+T = cell2table({'nIter' nIterStr;
+     'inPath' inPath    ;
+     'outPath' outPath   ;
+     'modType' modType   ;
+     'rPath' rPath     ;
+     'fixEf' fixEf     ;
+     'ranEf' ranEf     ;
+     'perPath' perPath   ;
+     'perVar' perVar    ;
+     'cstPath' cstPath   ;
+     'nCores' nCoresStr ;
+     'nFiles' nFilesStr ;
+     'nohupOut' nohupOut  ;
+     'startTime' startTime ;
+            });
+
+writetable(T,lm_Conf.cfgPath,'WriteVariableNames',0);
+
+command = ['sh' sep bashPath 'runParallelCores.sh' sep ...
+            q lm_Conf.cfgPath  q 
+            ]; 
+
 % Run the command trough bash
 system(command);
 

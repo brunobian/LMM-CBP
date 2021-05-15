@@ -1,20 +1,12 @@
 # This function runs LMM in R spliting the time files in nCores
 
-# This are the Parameters (in order) that this function takes 
-nIter=$1
-inPath=$2
-outPath=$3
-modType=$4
-rPath=$5
-fixEf=$6
-ranEf=$7
-perPath=$8
-perVar=$9
-cstPath=$10
-nCores=$11
-nFiles=$12
-nohupOut=$13
-start=$14
+# load parameter: path to configuration file
+cfgPath=$1
+
+# load variables from cfg file
+while IFS=, read -r var value; do
+  eval "$var"='$value'
+done < $cfgPath
 
 # Number of file to run on each core
 nRun=$(( $nFiles/$nCores ))
@@ -22,7 +14,8 @@ nRun=$(( $nFiles/$nCores ))
 for x in `seq 1 $nCores`
 do
 	# start file
-	tStart=$(( $start + $nRun*($x-1) )) 
+	tStart=$(( $startTime + $nRun*($x-1) )) 
+
 	# end file
 	tEnd=$(( $tStart + $nRun-1))
 	
@@ -38,7 +31,9 @@ do
 	nhOut="$nohupOut""$modType"_"$x" 
     cmdR="$rPath"completeRun.R
 	
-	nohup Rscript "$cmdR" "$tStart" "$tEnd" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
+	#nohup Rscript "$cmdR" "$tStart" "$tEnd" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
+
+	nohup Rscript "$cmdR" "$tStart" "$tEnd" "$cfgPath" > $nhOut &
 	
 	#nohup matlab -nodisplay -nodesktop -nojvm -r 'load cfg.mat; addpath(cfg.mPath); lm_completRun(cfg); exit;'  > $nhOut &
 
