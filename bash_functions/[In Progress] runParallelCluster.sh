@@ -27,9 +27,12 @@ for i in `seq 0 $(($mPcs-1))`
 do
 	l=${labs[i]}
 	z=${pcs[i]}
+	ip=10.2.$l.$z
+	echo "$ip"
+
 	echo "Starting in lab $l, PC $z"
 
-	tStartPc=$(( 1 + $mRunPc*($z-1) )) 
+	tStartPc=$(( 1 + $mRunPc*($i-1) )) 
 	tEndPc=$(( $tStartPc + $mRunPc))
 
 	if [ "$z" -eq "$mPcs" ] 
@@ -40,7 +43,7 @@ do
     echo -e "\tCopying files fom t$tStartPc to t$tEndPc"
     for f in `seq $tStartPc $tEndPc`
     do
-		scp -q "$scpPath"t$f.csv $inPath
+		ssh $ip -t scp -q "$scpPath"t$f.csv $inPath
 	done
 
 	nRunCore=$(( $mRunPc/$nCores ))
@@ -61,9 +64,9 @@ do
 		nhOut="$nohupOut""$modType"_"$x" 
 	    cmdR="$rPath"completeRun.R
 		
-		#nohup Rscript "$cmdR" "$tStart" "$tEnd" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
+		#nohup Rscript "$cmdR" "$tStartCore" "$tEndCore" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
 
-		nohup Rscript "$cmdR" "$tStart" "$tEnd" "$cfgPath" > $nhOut &
+		#ssh 10.2.3.2 -t nohup Rscript "$cmdR" "$tStartCore" "$tEndCore" "$cfgPath" > $nhOut &
 
 	    #For the first core, I waitfor the generation of the permutation 
 	    # matrix. 30s should be enough. 
