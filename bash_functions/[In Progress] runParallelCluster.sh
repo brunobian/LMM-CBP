@@ -40,7 +40,7 @@ do
     echo -e "\tCopying files fom t$tStartPc to t$tEndPc"
     for f in `seq $tStartPc $tEndPc`
     do
-		scp -q "$scpPath"t$f.csv 10.2.$l.$z:$inPath
+		scp -q "$scpPath"t$f.csv $inPath
 	done
 
 	nRunCore=$(( $mRunPc/$nCores ))
