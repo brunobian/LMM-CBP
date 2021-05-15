@@ -5,11 +5,11 @@
 # And for each PC, spliting the times in n Cores
 # If mPcs == 1, this function works as runParallelCores.sh
 
-#cfgPath=$1 
-#labsPath=$2 
+cfgPath=$1 
+labsPath=$2 
 
-cfgPath=/media/brunobian/DATABRUNO/Co-registro_2018/Data/LMM/cfg.csv
-labsPath=/media/brunobian/DATABRUNO/Co-registro_2018/Data/LMM/labos.csv
+#cfgPath=/media/brunobian/DATABRUNO/Co-registro_2018/Data/LMM/cfg.csv
+#labsPath=/media/brunobian/DATABRUNO/Co-registro_2018/Data/LMM/labos.csv
 
 # load variables from cfg file
 while IFS=, read -r var value; do
