@@ -63,7 +63,7 @@ do
 		
 		#nohup Rscript "$cmdR" "$tStart" "$tEnd" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
 
-		#nohup Rscript "$cmdR" "$tStart" "$tEnd" "$cfgPath" > $nhOut &
+		nohup Rscript "$cmdR" "$tStart" "$tEnd" "$cfgPath" > $nhOut &
 
 	    #For the first core, I waitfor the generation of the permutation 
 	    # matrix. 30s should be enough. 
