@@ -5,6 +5,8 @@ args = commandArgs(trailingOnly=TRUE)
 
 tStart  = as.numeric(args[1])
 tEnd    = as.numeric(args[2])
+print(tStart)
+print(tEnd)
 
 cfgPath = args[3]
 df=read.csv(cfgPath,header=FALSE, col.names=c("var","value"),colClasses = "character")

@@ -43,20 +43,26 @@ for iPerm = 1:length(permToLoad)
 
         val = splited{1};
         % Slopes or t_vals
-        if ismember(val, 'pt')     
-%             t_val = t_val';
-            if ismember('common', splited) || ismember('proverb', splited)
-                vari = [splited{2} '_' splited{3}];
-                iTime= splited{4}; 
-            else
-                vari = splited{2};
-                vari = regexprep(vari, '(', '');
-                vari = regexprep(vari, ')', '');
-                vari = regexprep(vari, '\$', '_');
-                vari = regexprep(vari, 'sntType-0.5', 'prov');
-                vari = regexprep(vari, 'sntType0.5', 'common');
-                iTime= splited{3}; 
-            end
+        if ismember(val, 'pt') 
+%             if ismember('pred', splited{2}) 
+%                 keyboard
+%             end
+            vari = join(splited(2:end-1),'_');
+            vari = vari{1};
+            vari = regexprep(vari, '(', '');
+            vari = regexprep(vari, ')', '');
+            vari = regexprep(vari, '\$', '_');
+            vari = regexprep(vari, 'sntType-0.5', 'prov');
+            vari = regexprep(vari, 'sntType0.5', 'common');
+            iTime = splited{end};
+                
+%             if ismember('common', splited) || ismember('proverb', splited)
+%                 vari = [splited{2} '_' splited{3}];
+%                 iTime= splited{4}; 
+%             else
+%                 vari = splited{2};            
+%                 iTime= splited{3}; 
+%             end
         elseif strcmpi('AIC', val) % AIC
             iTime  = splited{2}; 
             vari   = 'AIC';

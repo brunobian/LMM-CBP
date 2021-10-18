@@ -41,7 +41,7 @@ try
         if strcmpi(lm_Conf.export, 'csv')
             fn_tmp = [pth '/tmp.csv'];
             export_csv(T, pth, iTime, fn_tmp, lm_Conf.sep, su);
-        elseif strcmpi(lm_Conf.export,'table')
+        elseif strcmpi(lm_Conf.export,'mat')
             export_table(T, pth, iTime, su)
         end
     end
