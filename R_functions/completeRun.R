@@ -26,7 +26,11 @@ source(paste0(rPath, '/lmmTimeWindow.R'))
 source(paste0(rPath, '/remef.v0.6.9.R'))
 
 # Load custim function for data processing
+#print(cstPath)
 source(paste0(cstPath, '/processData.R'))
+# source(paste0(cstPath, '/resample.r'))
+# print("listo")
+
 
 # Generate new permutation matrix or load an existing one
 iterations <- generateIterMatrix(nIter, perVar, inPath, perPath)

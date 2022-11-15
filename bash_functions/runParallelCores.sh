@@ -25,12 +25,17 @@ do
 	#	tEnd=$(( tStart + $nFiles))
 	#fi
 		
-	echo "Starting in core $x with files $tStart to $tEnd"
-
 	# set  the locartions properly
 	nhOut="$nohupOut""$modType"_"$x" 
-    cmdR="$rPath"completeRun.R
+	cmdR="$rPath"completeRun.R
 	
+	if [ "$x" -eq $nCores ] 
+	then
+		tEnd=$nFiles
+	fi
+	
+	echo "Starting in core $x with files $tStart to $tEnd"
+
 	#nohup Rscript "$cmdR" "$tStart" "$tEnd" "$nIter" "$inPath" "$outPath" "$modType" "$rPath" "$fixEf" "$ranEf" "$perPath" "$perVar" "$cstPath" > $nhOut &
 
 	nohup Rscript "$cmdR" "$tStart" "$tEnd" "$cfgPath" > $nhOut &
